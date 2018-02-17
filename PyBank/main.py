@@ -2,7 +2,7 @@
 """
 Spyder Editor
 
-This is a temporary script file to analyse datasets.
+This is a temporary script file.
 """
 
 import os
@@ -13,11 +13,12 @@ for choice in range(1,3):
     total_revenue = []
     datecoll=[]
     totRev = 0
+    begRev=0
     greatestInc=0
     greatestDec=0
     greatDecdate='Sep-06'
     greatIncdate='Sep-06'
-    absTotRevChange=0
+    TotRevChange=0
     print()
     print("          Datasets          ")
     print("1. " + datasetname[0])
@@ -50,6 +51,7 @@ for choice in range(1,3):
 
     for month in range(0,total_months-1):
 
+            
         if int(total_revenue[month]) > greatestInc:
            greatestInc = int(total_revenue[month])
            greatIncdate=datecoll[month]
@@ -58,12 +60,12 @@ for choice in range(1,3):
             greatestDec = int(total_revenue[month])
             greatDecdate=datecoll[month]
         totRev = totRev + int(total_revenue[month])
-        #print(month, datecoll[month], total_revenue[month],totRev)
-        absTotRevChange=absTotRevChange+abs(int(total_revenue[month]))
+
+        TotRevChange=totRev-begRev
         if month==0:
-            avgAbsTotRevChang=0
+            begRev=int(total_revenue[month])
         else:
-            avgAbsTotRevChange=round(absTotRevChange/month,2)    
+            avgAbsTotRevChange=round(TotRevChange/(total_months-1),2)    
     
     print()
     print()
