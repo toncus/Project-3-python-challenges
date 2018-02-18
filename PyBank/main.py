@@ -1,10 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Spyder Editor
 
-This is a temporary script file.
-"""
-
+# Loop through our datasets
 import os
 choice = 0
 datasetname=["budget_data_1.csv", "budget_data_2.csv"]
@@ -35,45 +30,46 @@ for choice in range(1,3):
     
         # CSV reader specifies delimiter and variable that holds contents
         csvreader = csv.reader(csvfile, delimiter=',')
-    
-        # Prints the object
-        #print(csvreader)
-    
+
         #  Each row is read as a row
         for row in csvreader:
             
-            #print(total_months, row,)
+   # get data and add up months
             if total_months > 0:
                 total_revenue.append(row[1])
                 datecoll.append(row[0])
             total_months = total_months + 1
           
-
+# Loop through months to get our totals for greatest increase, decrease, and 
     for month in range(0,total_months-1):
-
-            
+        # greates increase calculation and correesponding date
         if int(total_revenue[month]) > greatestInc:
            greatestInc = int(total_revenue[month])
            greatIncdate=datecoll[month]
-            
+        # greates decrease calculation and correesponding date            
         if int(total_revenue[month]) < greatestDec:
             greatestDec = int(total_revenue[month])
             greatDecdate=datecoll[month]
+            # Total Revenue calculation
         totRev = totRev + int(total_revenue[month])
 
-        TotRevChange=totRev-begRev
+        # Get Beginning Revenue 
         if month==0:
             begRev=int(total_revenue[month])
-        else:
-            avgAbsTotRevChange=round(TotRevChange/(total_months-1),2)    
-    
+            # Total Revenue change calculation
+        TotRevChange=totRev-begRev
+        if month!=0:
+            avgTotRevChange=round(TotRevChange/(total_months-1),2)
+
     print()
     print()
     print("Total Months                 ", total_months-1)
     print("Total Revenue                ", '${}'.format(totRev))
-    print("Average Revenue Change       ", '${}'.format(avgAbsTotRevChange,",.2f"))
+    print("Average Revenue Change       ", '${}'.format(avgTotRevChange,",.2f"))
     print("Greatest Increase In Revenue:", greatIncdate, '(${})'.format(greatestInc))
-    print("Greatest Decrease In Revenue:", greatDecdate, '(${})'.format(greatestDec))    
+    print("Greatest Decrease In Revenue:", greatDecdate, '(${})'.format(greatestDec))
+
+# output to txt file by building string and sending it to txt file
     output_file = os.path.join("PyBank.txt")
     if choice==1:
         output_file =open ("PyBank.txt", 'w')
@@ -91,7 +87,7 @@ for choice in range(1,3):
     stringlist.append("\n")
     stringlist.append("Total Months                 " + str(total_months-1) +"\n")
     stringlist.append("Total Revenue                " +'${}'.format(totRev) +"\n")
-    stringlist.append("Average Revenue Change       " + '${}'.format(str(avgAbsTotRevChange),",.2f") +"\n")
+    stringlist.append("Average Revenue Change       " + '${}'.format(str(avgTotRevChange),",.2f") +"\n")
     stringlist.append("Greatest Increase In Revenue:" + greatIncdate + ' (${})'.format(greatestInc)+"\n")
     stringlist.append("Greatest Decrease In Revenue:"+ greatDecdate + ' (${})'.format(greatestDec)+"\n")
     output_file.writelines(stringlist)
