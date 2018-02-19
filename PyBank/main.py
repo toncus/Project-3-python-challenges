@@ -57,7 +57,7 @@ for choice in range(1,3):
         if month==0:
             begRev=int(total_revenue[month])
             # Total Revenue change calculation
-        TotRevChange=totRev-begRev
+        TotRevChange=totRev
         if month!=0:
             avgTotRevChange=round(TotRevChange/(total_months-1),2)
 
