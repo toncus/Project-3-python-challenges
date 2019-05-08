@@ -1,2 +1,2 @@
 # python-challenge
-Python Week 3 challenges
+Project-3 pythhon-challenges
